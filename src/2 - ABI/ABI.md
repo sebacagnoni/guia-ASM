@@ -49,7 +49,7 @@ La convención de llamadas define:
 - En qué registro esperar el valor de retorno de la función llamada (o donde escribirlo, desde el punto de vista de la función llamada).
   
   - En 32 bits, el valor de retorno se espera en EAX.
-  - En 64 bits, el valor de retono se espera en RAX, si es un entero o puntero, y en XMM0 si es un flotante.
+  - En 64 bits, el valor de retorno se espera en RAX, si es un entero o puntero, y en XMM0 si es un flotante.
 - Qué alineamiento debe tener la **pila** (**stack**) al llamar a una función. Tanto en 32 como en 64 bits, la pila debe estar alineada a 16 bytes al momento de llamar a una función de C. ¿Por qué? Hay funcioes que hacen uso operaciones de registros largos (XMM, YMM) que requieren datos alineados a 16 bytes. Si nosotros al llamar a una función no respetamos la alineación y resulta que esa función no llama a ninguna otra que dependa de la alineación de la pila para operar, no pasa nada. Pero si sin que lo sepamos llama a otra que utiliza dichas operaciones, no va a chequear el estado de alineación de la pila antes de hacerlo, porque asume que fue llamada con la pila correctamente alineada, y por tanto va a fallar.
 
 ¹ En relación al orden en que están en la declaración de la función. También se puede decir que se pushean desde el último al primero.
