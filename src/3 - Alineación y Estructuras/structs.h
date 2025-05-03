@@ -8,10 +8,10 @@
 // arreglo: Arreglo de enteros
 // longitud: Longitud del arreglo
 typedef struct nodo_s {
-    struct nodo_s* next;   //asmdef_offset:NODO_OFFSET_NEXT
-    uint8_t categoria;     //asmdef_offset:NODO_OFFSET_CATEGORIA
-    uint32_t* arreglo;     //asmdef_offset:NODO_OFFSET_ARREGLO
-    uint32_t longitud;     //asmdef_offset:NODO_OFFSET_LONGITUD
+    struct nodo_s* next;   //asmdef_offset:NODO_OFFSET_NEXT:64*4 = 256 b
+    uint8_t categoria;     //asmdef_offset:NODO_OFFSET_CATEGORIA:5*64 = 320 b
+    uint32_t* arreglo;     //asmdef_offset:NODO_OFFSET_ARREGLO:6*64 = 384 b
+    uint32_t longitud;     //asmdef_offset:NODO_OFFSET_LONGITUD: 8*64 = 512 b
 } nodo_t; //asmdef_size:NODO_SIZE
 
 typedef struct __attribute__((__packed__)) packed_nodo_s {
@@ -30,3 +30,16 @@ typedef struct lista_s {
 typedef struct __attribute__((__packed__)) packed_lista_s {
     packed_nodo_t* head;    //asmdef_offset:PACKED_LISTA_OFFSET_HEAD
 } packed_lista_t; //asmdef_size:PACKED_LISTA_SIZE
+
+/*
+mrep
+nodo:
+nodo_s* next:      [x][x][x][x][x][x][x][x]
+uint8_t categoria: [x][-][-][-][-][-][-][-]
+uint32_t* arreglo: [x][x][x][x][x][x][x][x]
+uint32_t longitud: [x][x][x][x][-][-][-][-]
+
+mrep
+lista_s:
+nodo_t* head: [x][x][x][x][x][x][x][x]
+*/
